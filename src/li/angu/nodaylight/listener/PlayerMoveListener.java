@@ -1,5 +1,9 @@
 package li.angu.nodaylight.listener;
 
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerMoveEvent;
+
 /*************************************************************************
  *
  * ANGULI NETWORKS CONFIDENTIAL
@@ -19,5 +23,19 @@ package li.angu.nodaylight.listener;
  *
  * This File belongs to the NoDaylight from Anguli Networks
  */
-public class PlayerMoveListener {
+public class PlayerMoveListener implements Listener {
+
+    @EventHandler
+    public void onPlayerMove(PlayerMoveEvent event) {
+        if (!event.getFrom().getWorld().getName().equalsIgnoreCase("cave")) {
+            return;
+        }
+
+        if (event.getTo().getBlock().getLightFromSky() < 15) {
+            return;
+        }
+
+        event.getPlayer().setFireTicks(20);
+    }
+
 }

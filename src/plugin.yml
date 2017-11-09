@@ -1,0 +1,4 @@
+name: NoDaylight
+version: 0.1
+author: Anguli Networks
+main: li.angu.nodaylight.NoDaylight

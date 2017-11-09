@@ -1,5 +1,10 @@
 package li.angu.nodaylight;
 
+import li.angu.nodaylight.listener.PlayerMoveListener;
+import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.logging.Level;
+
 /*************************************************************************
  *
  * ANGULI NETWORKS CONFIDENTIAL
@@ -19,5 +24,16 @@ package li.angu.nodaylight;
  *
  * This File belongs to the NoDaylight from Anguli Networks
  */
-public class NoDaylight {
+public class NoDaylight extends JavaPlugin {
+
+    @Override public void onEnable() {
+
+        getServer().getPluginManager().registerEvents(new PlayerMoveListener(), this);
+
+        getLogger().log(Level.INFO, "NoDaylight Plugin v" + getDescription().getVersion() + " started");
+    }
+
+    @Override public void onDisable() {
+        getLogger().log(Level.INFO, "NoDaylight Plugin v" + getDescription().getVersion() + " stopped");
+    }
 }
