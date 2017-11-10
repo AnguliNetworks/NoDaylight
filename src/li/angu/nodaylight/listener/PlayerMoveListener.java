@@ -1,5 +1,8 @@
 package li.angu.nodaylight.listener;
 
+import net.md_5.bungee.api.ChatColor;
+import net.md_5.bungee.api.chat.TextComponent;
+import org.bukkit.GameMode;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -31,11 +34,20 @@ public class PlayerMoveListener implements Listener {
             return;
         }
 
-        if (event.getTo().getBlock().getLightFromSky() < 15) {
+        if (event.getTo().getBlock().getLightFromSky() == 0) {
             return;
         }
 
-        event.getPlayer().setFireTicks(20);
+        if (event.getPlayer().getGameMode() == GameMode.CREATIVE) {
+            return;
+        }
+
+        event.getPlayer().setHealth(0.0D);
+
+        TextComponent message = new TextComponent("DU VOLLIDIOT! SONNE IST GEFÄHRLICH! HOFFE DU LERNST DARAUS");
+        message.setColor(ChatColor.DARK_RED);
+
+        event.getPlayer().spigot().sendMessage(message);
     }
 
 }
